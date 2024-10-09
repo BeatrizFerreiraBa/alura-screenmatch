@@ -1,0 +1,76 @@
+package screnmatch;
+
+import br.com.alura.screnmatch.calculo.CalculadoraDeTempo;
+import br.com.alura.screnmatch.calculo.FiltroRecomendacao;
+import br.com.alura.screnmatch.modelos.Episodio;
+import br.com.alura.screnmatch.modelos.Filme;
+import br.com.alura.screnmatch.modelos.Serie;
+
+public class Principal {
+
+	public static void main(String[] args) {
+		Filme meuFilme = new Filme();
+		meuFilme.setNome("As Branquelas");
+		meuFilme.setAnoDeLancamento(1970);
+		meuFilme.setDuracaoEmMinutos(180);
+		System.out.println("Duração do Filme: "+meuFilme.getDuracaoEmMinutos());
+		
+		
+		meuFilme.exibeFichaTecnica();
+		meuFilme.avalia(8);
+		meuFilme.avalia(5);
+		meuFilme.avalia(10);
+		System.out.println("Total de Avaliações: "+meuFilme.getTotalDeAvaliacoes());
+		System.out.println(meuFilme.pegaMedia());
+		
+		Serie lost=new Serie();
+		lost.setNome("Lost");
+		lost.setAnoDeLancamento(2000);
+		lost.exibeFichaTecnica();
+		lost.setTemporadas(10);
+		lost.setEpisodiosPorTemporada(10);
+		lost.setMinutosPorEpisodio(50);
+		System.out.println("Duração para maratonar Lost: "+ lost.getDuracaoEmMinutos());
+		
+		///Outro Filme
+		Filme outroFilme = new Filme();
+		outroFilme.setNome("Liga da Justiça");
+		outroFilme.setAnoDeLancamento(2018);
+		outroFilme.setDuracaoEmMinutos(200);
+		outroFilme.setIncluidoNoPlano(true);
+		
+		Filme favorito=new Filme();
+		favorito.setNome("Simplesmente Acontece");
+		favorito.setAnoDeLancamento(2015);
+		favorito.setDiretor("John");
+		favorito.setDuracaoEmMinutos(300);
+		favorito.setIncluidoNoPlano(true);
+		
+		Serie serie=new Serie();
+		serie.setNome("The good place");
+		serie.setAnoDeLancamento(2016);
+		serie.setAtiva(false);
+		serie.setMinutosPorEpisodio(20);
+		serie.setEpisodiosPorTemporada(10);
+		serie.setTemporadas(6);
+		
+		
+		CalculadoraDeTempo calculadora=new CalculadoraDeTempo();
+		calculadora.inclui(meuFilme);
+		calculadora.inclui(outroFilme);
+		calculadora.inclui(favorito);
+		calculadora.inclui(serie);
+		calculadora.inclui(lost);
+		System.out.println(calculadora.getTempoTotal());
+		
+		FiltroRecomendacao filtro= new FiltroRecomendacao();
+		filtro.filtra(meuFilme);
+		
+		Episodio episodio=new Episodio();
+		episodio.setNumero(1);
+		episodio.setSerie(lost);
+		episodio.setTotalVisualizacao(300);
+		filtro.filtra(episodio);
+	}
+}
+
